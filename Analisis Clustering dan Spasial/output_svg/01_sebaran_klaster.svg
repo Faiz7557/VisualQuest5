@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="601.570673pt" height="481.866094pt" viewBox="0 0 601.570673 481.866094" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-08T14:29:26.918838</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.6, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 481.866094 
+L 601.570673 481.866094 
+L 601.570673 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 44.502969 439.845 
+L 580.79206 439.845 
+L 580.79206 21.825 
+L 44.502969 21.825 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 89.844782 439.845 
+L 89.844782 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="89.844782" y="457.218594" transform="rotate(-0 89.844782 457.218594)">−8</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <path d="M 153.227402 439.845 
+L 153.227402 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="153.227402" y="457.218594" transform="rotate(-0 153.227402 457.218594)">−6</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <path d="M 216.610022 439.845 
+L 216.610022 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="216.610022" y="457.218594" transform="rotate(-0 216.610022 457.218594)">−4</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <path d="M 279.992643 439.845 
+L 279.992643 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="279.992643" y="457.218594" transform="rotate(-0 279.992643 457.218594)">−2</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <path d="M 343.375263 439.845 
+L 343.375263 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="343.375263" y="457.218594" transform="rotate(-0 343.375263 457.218594)">0</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <path d="M 406.757883 439.845 
+L 406.757883 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="406.757883" y="457.218594" transform="rotate(-0 406.757883 457.218594)">2</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <path d="M 470.140503 439.845 
+L 470.140503 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="470.140503" y="457.218594" transform="rotate(-0 470.140503 457.218594)">4</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_8">
+      <path d="M 533.523123 439.845 
+L 533.523123 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="533.523123" y="457.218594" transform="rotate(-0 533.523123 457.218594)">6</text>
+     </g>
+    </g>
+    <g id="text_9">
+     <text style="font-size: 12px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="312.647514" y="472.140469" transform="rotate(-0 312.647514 472.140469)">PC1 (70.0%)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9">
+      <path d="M 44.502969 422.512799 
+L 580.79206 422.512799 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="426.449596" transform="rotate(-0 35.002969 426.449596)">−2</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_10">
+      <path d="M 44.502969 367.788628 
+L 580.79206 367.788628 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="371.725425" transform="rotate(-0 35.002969 371.725425)">−1</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_11">
+      <path d="M 44.502969 313.064457 
+L 580.79206 313.064457 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="317.001254" transform="rotate(-0 35.002969 317.001254)">0</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_12">
+      <path d="M 44.502969 258.340286 
+L 580.79206 258.340286 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="262.277083" transform="rotate(-0 35.002969 262.277083)">1</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_13">
+      <path d="M 44.502969 203.616115 
+L 580.79206 203.616115 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="207.552912" transform="rotate(-0 35.002969 207.552912)">2</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_14">
+      <path d="M 44.502969 148.891944 
+L 580.79206 148.891944 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="152.828741" transform="rotate(-0 35.002969 152.828741)">3</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_15">
+      <path d="M 44.502969 94.167773 
+L 580.79206 94.167773 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="98.10457" transform="rotate(-0 35.002969 98.10457)">4</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_16">
+      <path d="M 44.502969 39.443602 
+L 580.79206 39.443602 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #cccccc; stroke-linecap: round"/>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 11px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: end; fill: #262626" x="35.002969" y="43.380399" transform="rotate(-0 35.002969 43.380399)">5</text>
+     </g>
+    </g>
+    <g id="text_18">
+     <text style="font-size: 12px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="15.935625" y="230.835" transform="rotate(-90 15.935625 230.835)">PC2 (24.2%)</text>
+    </g>
+   </g>
+   <g id="line2d_17">
+    <path d="M 44.502969 313.064457 
+L 580.79206 313.064457 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #808080; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_18">
+    <path d="M 343.375263 439.845 
+L 343.375263 21.825 
+" clip-path="url(#p4322ead65f)" style="fill: none; stroke: #808080; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 44.502969 439.845 
+L 44.502969 21.825 
+" style="fill: none; stroke: #cccccc; stroke-width: 1.25; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 580.79206 439.845 
+L 580.79206 21.825 
+" style="fill: none; stroke: #cccccc; stroke-width: 1.25; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 44.502969 439.845 
+L 580.79206 439.845 
+" style="fill: none; stroke: #cccccc; stroke-width: 1.25; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 44.502969 21.825 
+L 580.79206 21.825 
+" style="fill: none; stroke: #cccccc; stroke-width: 1.25; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="PathCollection_1">
+    <defs>
+     <path id="m21688add62" d="M 0 4.330127 
+C 1.148363 4.330127 2.249847 3.873878 3.061862 3.061862 
+C 3.873878 2.249847 4.330127 1.148363 4.330127 0 
+C 4.330127 -1.148363 3.873878 -2.249847 3.061862 -3.061862 
+C 2.249847 -3.873878 1.148363 -4.330127 0 -4.330127 
+C -1.148363 -4.330127 -2.249847 -3.873878 -3.061862 -3.061862 
+C -3.873878 -2.249847 -4.330127 -1.148363 -4.330127 0 
+C -4.330127 1.148363 -3.873878 2.249847 -3.061862 3.061862 
+C -2.249847 3.873878 -1.148363 4.330127 0 4.330127 
+z
+" style="stroke: #ffffff; stroke-opacity: 0.85"/>
+    </defs>
+    <g clip-path="url(#p4322ead65f)">
+     <use xlink:href="#m21688add62" x="415.916458" y="232.217957" style="fill: #66c2a5; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m21688add62" x="458.926084" y="282.492945" style="fill: #66c2a5; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m21688add62" x="556.415283" y="40.825909" style="fill: #66c2a5; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m21688add62" x="468.225567" y="197.489848" style="fill: #66c2a5; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m21688add62" x="414.707707" y="199.010791" style="fill: #66c2a5; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+    </g>
+   </g>
+   <g id="PathCollection_2">
+    <defs>
+     <path id="m95f611f63e" d="M 0 4.330127 
+C 1.148363 4.330127 2.249847 3.873878 3.061862 3.061862 
+C 3.873878 2.249847 4.330127 1.148363 4.330127 0 
+C 4.330127 -1.148363 3.873878 -2.249847 3.061862 -3.061862 
+C 2.249847 -3.873878 1.148363 -4.330127 0 -4.330127 
+C -1.148363 -4.330127 -2.249847 -3.873878 -3.061862 -3.061862 
+C -3.873878 -2.249847 -4.330127 -1.148363 -4.330127 0 
+C -4.330127 1.148363 -3.873878 2.249847 -3.061862 3.061862 
+C -2.249847 3.873878 -1.148363 4.330127 0 4.330127 
+z
+" style="stroke: #ffffff; stroke-opacity: 0.85"/>
+    </defs>
+    <g clip-path="url(#p4322ead65f)">
+     <use xlink:href="#m95f611f63e" x="185.281578" y="92.664547" style="fill: #fc8d62; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m95f611f63e" x="68.879746" y="206.731757" style="fill: #fc8d62; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+    </g>
+   </g>
+   <g id="PathCollection_3">
+    <defs>
+     <path id="m91a5ee70ea" d="M 0 4.330127 
+C 1.148363 4.330127 2.249847 3.873878 3.061862 3.061862 
+C 3.873878 2.249847 4.330127 1.148363 4.330127 0 
+C 4.330127 -1.148363 3.873878 -2.249847 3.061862 -3.061862 
+C 2.249847 -3.873878 1.148363 -4.330127 0 -4.330127 
+C -1.148363 -4.330127 -2.249847 -3.873878 -3.061862 -3.061862 
+C -3.873878 -2.249847 -4.330127 -1.148363 -4.330127 0 
+C -4.330127 1.148363 -3.873878 2.249847 -3.061862 3.061862 
+C -2.249847 3.873878 -1.148363 4.330127 0 4.330127 
+z
+" style="stroke: #ffffff; stroke-opacity: 0.85"/>
+    </defs>
+    <g clip-path="url(#p4322ead65f)">
+     <use xlink:href="#m91a5ee70ea" x="349.834881" y="377.762997" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="371.879286" y="346.046258" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="364.525457" y="368.515453" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="367.5013" y="324.151828" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="349.120471" y="335.870159" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="342.516494" y="368.079149" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="333.673849" y="362.913677" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="365.940919" y="355.114301" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="369.008996" y="380.048688" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="341.46693" y="373.897975" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="412.840308" y="420.844091" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="356.112448" y="342.679278" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="375.172286" y="364.445661" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="395.438872" y="388.020386" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="313.869724" y="380.313336" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="316.107455" y="344.652008" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="356.519775" y="340.078561" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="353.969288" y="354.324441" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="377.506569" y="369.218208" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="352.413428" y="282.207427" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="361.312381" y="346.014305" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="348.10971" y="352.138692" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="317.045651" y="361.888905" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="330.444934" y="385.266222" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#m91a5ee70ea" x="353.60919" y="259.320786" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+    </g>
+   </g>
+   <g id="PathCollection_4">
+    <defs>
+     <path id="mb35dd799f4" d="M 0 4.330127 
+C 1.148363 4.330127 2.249847 3.873878 3.061862 3.061862 
+C 3.873878 2.249847 4.330127 1.148363 4.330127 0 
+C 4.330127 -1.148363 3.873878 -2.249847 3.061862 -3.061862 
+C 2.249847 -3.873878 1.148363 -4.330127 0 -4.330127 
+C -1.148363 -4.330127 -2.249847 -3.873878 -3.061862 -3.061862 
+C -3.873878 -2.249847 -4.330127 -1.148363 -4.330127 0 
+C -4.330127 1.148363 -3.873878 2.249847 -3.061862 3.061862 
+C -2.249847 3.873878 -1.148363 4.330127 0 4.330127 
+z
+" style="stroke: #ffffff; stroke-opacity: 0.85"/>
+    </defs>
+    <g clip-path="url(#p4322ead65f)">
+     <use xlink:href="#mb35dd799f4" x="257.901343" y="345.201244" style="fill: #e78ac3; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#mb35dd799f4" x="289.349461" y="343.240358" style="fill: #e78ac3; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#mb35dd799f4" x="302.760219" y="265.146291" style="fill: #e78ac3; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#mb35dd799f4" x="289.574712" y="277.686356" style="fill: #e78ac3; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#mb35dd799f4" x="243.800798" y="257.217987" style="fill: #e78ac3; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     <use xlink:href="#mb35dd799f4" x="220.580427" y="272.710587" style="fill: #e78ac3; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+    </g>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="353.834881" y="374.762997" transform="rotate(-0 353.834881 374.762997)">Aceh</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="375.879286" y="343.046258" transform="rotate(-0 375.879286 343.046258)">Sumatera Utara</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="368.525457" y="365.515453" transform="rotate(-0 368.525457 365.515453)">Sumatera Barat</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="419.916458" y="229.217957" transform="rotate(-0 419.916458 229.217957)">Riau</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="371.5013" y="321.151828" transform="rotate(-0 371.5013 321.151828)">Jambi</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="353.120471" y="332.870159" transform="rotate(-0 353.120471 332.870159)">Sumatera Selatan</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="346.516494" y="365.079149" transform="rotate(-0 346.516494 365.079149)">Bengkulu</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="337.673849" y="359.913677" transform="rotate(-0 337.673849 359.913677)">Lampung</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="369.940919" y="352.114301" transform="rotate(-0 369.940919 352.114301)">Kepulauan Bangka Belitung</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="462.926084" y="279.492945" transform="rotate(-0 462.926084 279.492945)">Kepulauan Riau</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="560.415283" y="37.825909" transform="rotate(-0 560.415283 37.825909)">DKI Jakarta</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="373.008996" y="377.048688" transform="rotate(-0 373.008996 377.048688)">Jawa Barat</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="345.46693" y="370.897975" transform="rotate(-0 345.46693 370.897975)">Jawa Tengah</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="416.840308" y="417.844091" transform="rotate(-0 416.840308 417.844091)">DI Yogyakarta</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="360.112448" y="339.679278" transform="rotate(-0 360.112448 339.679278)">Jawa Timur</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="379.172286" y="361.445661" transform="rotate(-0 379.172286 361.445661)">Banten</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="399.438872" y="385.020386" transform="rotate(-0 399.438872 385.020386)">Bali</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="317.869724" y="377.313336" transform="rotate(-0 317.869724 377.313336)">Nusa Tenggara Barat</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="261.901343" y="342.201244" transform="rotate(-0 261.901343 342.201244)">Nusa Tenggara Timur</text>
+   </g>
+   <g id="text_38">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="320.107455" y="341.652008" transform="rotate(-0 320.107455 341.652008)">Kalimantan Barat</text>
+   </g>
+   <g id="text_39">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="360.519775" y="337.078561" transform="rotate(-0 360.519775 337.078561)">Kalimantan Tengah</text>
+   </g>
+   <g id="text_40">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="357.969288" y="351.324441" transform="rotate(-0 357.969288 351.324441)">Kalimantan Selatan</text>
+   </g>
+   <g id="text_41">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="472.225567" y="194.489848" transform="rotate(-0 472.225567 194.489848)">Kalimantan Timur</text>
+   </g>
+   <g id="text_42">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="418.707707" y="196.010791" transform="rotate(-0 418.707707 196.010791)">Kalimantan Utara</text>
+   </g>
+   <g id="text_43">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="381.506569" y="366.218208" transform="rotate(-0 381.506569 366.218208)">Sulawesi Utara</text>
+   </g>
+   <g id="text_44">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="356.413428" y="279.207427" transform="rotate(-0 356.413428 279.207427)">Sulawesi Tengah</text>
+   </g>
+   <g id="text_45">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="365.312381" y="343.014305" transform="rotate(-0 365.312381 343.014305)">Sulawesi Selatan</text>
+   </g>
+   <g id="text_46">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="352.10971" y="349.138692" transform="rotate(-0 352.10971 349.138692)">Sulawesi Tenggara</text>
+   </g>
+   <g id="text_47">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="321.045651" y="358.888905" transform="rotate(-0 321.045651 358.888905)">Gorontalo</text>
+   </g>
+   <g id="text_48">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="293.349461" y="340.240358" transform="rotate(-0 293.349461 340.240358)">Sulawesi Barat</text>
+   </g>
+   <g id="text_49">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="334.444934" y="382.266222" transform="rotate(-0 334.444934 382.266222)">Maluku</text>
+   </g>
+   <g id="text_50">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="357.60919" y="256.320786" transform="rotate(-0 357.60919 256.320786)">Maluku Utara</text>
+   </g>
+   <g id="text_51">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="306.760219" y="262.146291" transform="rotate(-0 306.760219 262.146291)">Papua Barat</text>
+   </g>
+   <g id="text_52">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="293.574712" y="274.686356" transform="rotate(-0 293.574712 274.686356)">Papua Barat Daya</text>
+   </g>
+   <g id="text_53">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="247.800798" y="254.217987" transform="rotate(-0 247.800798 254.217987)">Papua</text>
+   </g>
+   <g id="text_54">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="189.281578" y="89.664547" transform="rotate(-0 189.281578 89.664547)">Papua Tengah</text>
+   </g>
+   <g id="text_55">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="72.879746" y="203.731757" transform="rotate(-0 72.879746 203.731757)">Papua Pegunungan</text>
+   </g>
+   <g id="text_56">
+    <text style="font-size: 6.5px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626; opacity: 0.85" x="224.580427" y="269.710587" transform="rotate(-0 224.580427 269.710587)">Papua Selatan</text>
+   </g>
+   <g id="text_57">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: middle; fill: #262626" x="312.647514" y="15.825" transform="rotate(-0 312.647514 15.825)">Ward k=4 pada Ruang Komponen Utama</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_7">
+     <path d="M 50.102969 74.03375 
+L 177.980469 74.03375 
+Q 179.580469 74.03375 179.580469 72.43375 
+L 179.580469 27.425 
+Q 179.580469 25.825 177.980469 25.825 
+L 50.102969 25.825 
+Q 48.502969 25.825 48.502969 27.425 
+L 48.502969 72.43375 
+Q 48.502969 74.03375 50.102969 74.03375 
+z
+" style="fill: #ffffff; opacity: 0.8; stroke: #cccccc; stroke-linejoin: miter"/>
+    </g>
+    <g id="PathCollection_5">
+     <g>
+      <use xlink:href="#m21688add62" x="59.702969" y="32.675" style="fill: #66c2a5; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     </g>
+    </g>
+    <g id="text_58">
+     <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626" x="74.102969" y="34.775" transform="rotate(-0 74.102969 34.775)">0 — Maju dan Terhubung</text>
+    </g>
+    <g id="PathCollection_6">
+     <g>
+      <use xlink:href="#m95f611f63e" x="59.702969" y="44.10875" style="fill: #fc8d62; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     </g>
+    </g>
+    <g id="text_59">
+     <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626" x="74.102969" y="46.20875" transform="rotate(-0 74.102969 46.20875)">1 — Tertinggal Ekstrem</text>
+    </g>
+    <g id="PathCollection_7">
+     <g>
+      <use xlink:href="#m91a5ee70ea" x="59.702969" y="55.5425" style="fill: #8da0cb; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     </g>
+    </g>
+    <g id="text_60">
+     <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626" x="74.102969" y="57.6425" transform="rotate(-0 74.102969 57.6425)">2 — Berkembang Menengah</text>
+    </g>
+    <g id="PathCollection_8">
+     <g>
+      <use xlink:href="#mb35dd799f4" x="59.702969" y="67.05" style="fill: #e78ac3; fill-opacity: 0.85; stroke: #ffffff; stroke-opacity: 0.85"/>
+     </g>
+    </g>
+    <g id="text_61">
+     <text style="font-size: 8px; font-family: 'Arial', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', sans-serif; text-anchor: start; fill: #262626" x="74.102969" y="69.15" transform="rotate(-0 74.102969 69.15)">3 — Tertinggal Sedang</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p4322ead65f">
+   <rect x="44.502969" y="21.825" width="536.289091" height="418.02"/>
+  </clipPath>
+ </defs>
+</svg>

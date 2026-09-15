@@ -1,0 +1,7 @@
+variabel,Moran's I,z,p,pola
+Kepemilikan Ponsel (%),0.4501,6.913,0.001,mengelompok
+Rata-rata Lama Sekolah (thn),0.2286,3.702,0.004,mengelompok
+IPM,0.4872,7.244,0.001,mengelompok
+PDRB per Kapita (ribu Rp),-0.0697,-0.638,0.274,acak
+TPT (%),0.1214,1.879,0.055,acak
+Indeks Kerentanan,0.3402,5.496,0.001,mengelompok
