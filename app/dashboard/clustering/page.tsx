@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ProvinceData } from "@/types/data";
 import { ChoroplethMap } from "@/components/dashboard/choropleth-map";
 import { ClusterCards } from "@/components/dashboard/cluster-cards";
@@ -25,6 +25,7 @@ export default function ClusteringDashboardPage() {
   const [activeLayer, setActiveLayer] = useState<"klaster" | "kerentanan" | "ponsel" | "lisa" | "gwr_ipm">("klaster");
   const [selectedProvince, setSelectedProvince] = useState<ProvinceData | null>(null);
   const [selectedCluster, setSelectedCluster] = useState<number | null>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/data/clustering_results.json")
@@ -32,6 +33,13 @@ export default function ClusteringDashboardPage() {
       .then((data) => setProvinces(data))
       .catch((err) => console.error(err));
   }, []);
+
+  // Auto-scroll to detail drawer on mobile when a province is selected
+  useEffect(() => {
+    if (selectedProvince && typeof window !== "undefined" && window.innerWidth < 1024) {
+      drawerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [selectedProvince]);
 
   const clusterId = selectedProvince ? Number(selectedProvince.klaster) : null;
   const clusterDetails = clusterId !== null ? CLUSTERS[clusterId] : null;
@@ -84,16 +92,16 @@ export default function ClusteringDashboardPage() {
       {/* 2. Interactive Map Section with Layer Switcher & Detail Panel */}
       <div className="space-y-4">
         {/* Layer Selector Buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto pb-1 sm:pb-0">
+            <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5 shrink-0">
               <Layers className="h-4 w-4 text-orange-400" />
-              Pilih Layer Peta:
+              Pilih Layer:
             </span>
-            <div className="inline-flex flex-wrap rounded-xl bg-[#0b162a] p-1 border border-white/10">
+            <div className="inline-flex rounded-xl bg-[#0b162a] p-1 border border-white/10 shrink-0">
               <button
                 onClick={() => setActiveLayer("klaster")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   activeLayer === "klaster"
                     ? "bg-orange-500 text-white shadow-sm"
                     : "text-slate-400 hover:text-white"
@@ -103,7 +111,7 @@ export default function ClusteringDashboardPage() {
               </button>
               <button
                 onClick={() => setActiveLayer("kerentanan")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   activeLayer === "kerentanan"
                     ? "bg-orange-500 text-white shadow-sm"
                     : "text-slate-400 hover:text-white"
@@ -113,7 +121,7 @@ export default function ClusteringDashboardPage() {
               </button>
               <button
                 onClick={() => setActiveLayer("ponsel")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   activeLayer === "ponsel"
                     ? "bg-orange-500 text-white shadow-sm"
                     : "text-slate-400 hover:text-white"
@@ -123,7 +131,7 @@ export default function ClusteringDashboardPage() {
               </button>
               <button
                 onClick={() => setActiveLayer("lisa")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   activeLayer === "lisa"
                     ? "bg-orange-500 text-white shadow-sm"
                     : "text-slate-400 hover:text-white"
@@ -133,7 +141,7 @@ export default function ClusteringDashboardPage() {
               </button>
               <button
                 onClick={() => setActiveLayer("gwr_ipm")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                   activeLayer === "gwr_ipm"
                     ? "bg-orange-500 text-white shadow-sm"
                     : "text-slate-400 hover:text-white"
@@ -144,7 +152,7 @@ export default function ClusteringDashboardPage() {
             </div>
           </div>
 
-          <span className="text-xs text-slate-500 italic">
+          <span className="text-xs text-slate-500 italic hidden sm:inline">
             *Klik poligon provinsi di peta untuk melihat audit indikator & koefisien GWR
           </span>
         </div>
@@ -162,7 +170,10 @@ export default function ClusteringDashboardPage() {
 
           {/* Selected Province Detail Drawer */}
           {selectedProvince && (
-            <div className="lg:col-span-4 glass-card rounded-2xl p-6 border border-orange-500/30 space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+            <div 
+              ref={drawerRef}
+              className="lg:col-span-4 glass-card rounded-2xl p-6 border border-orange-500/30 space-y-5 animate-in fade-in slide-in-from-right-4 duration-300"
+            >
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-orange-400 block mb-1">

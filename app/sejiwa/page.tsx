@@ -34,6 +34,7 @@ const PRESET_CHIPS = [
 
 export default function SejiwaDemoPage() {
   const [mode, setMode] = useState<"web" | "ussd">("web");
+  const [mobileTab, setMobileTab] = useState<"chat" | "triage">("chat");
   const [input, setInput] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -228,10 +229,42 @@ Kanal Akses: ${mode === "web" ? "Hotline 119 Web Chat" : "SMS/USSD Gateway 3T"}`
         </div>
       </div>
 
+      {/* Mobile Tab Switcher (Visible only on < lg screens) */}
+      <div className="flex lg:hidden rounded-xl bg-[#0b162a] p-1 border border-white/10 text-xs w-full">
+        <button
+          onClick={() => setMobileTab("chat")}
+          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg font-semibold transition-all ${
+            mobileTab === "chat"
+              ? "bg-orange-500 text-white shadow-sm"
+              : "text-slate-400 hover:text-white"
+          }`}
+        >
+          <MessageSquare className="h-4 w-4" />
+          <span>{mode === "web" ? "Chat Konseling" : "Simulator USSD"}</span>
+        </button>
+        <button
+          onClick={() => setMobileTab("triage")}
+          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg font-semibold transition-all ${
+            mobileTab === "triage"
+              ? "bg-orange-500 text-white shadow-sm"
+              : "text-slate-400 hover:text-white"
+          }`}
+        >
+          <Activity className="h-4 w-4" />
+          <span>Panel Triase AI</span>
+          <span
+            className="px-1.5 py-0.5 rounded-full text-[10px] font-black text-black"
+            style={{ backgroundColor: currentEval.categoryColor }}
+          >
+            {currentEval.urgencyScore}
+          </span>
+        </button>
+      </div>
+
       {/* 2. Main Layout Split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Web Chat OR USSD Feature Phone Simulator */}
-        <div className="lg:col-span-7 flex flex-col h-[660px] glass-card rounded-2xl border border-white/10 overflow-hidden">
+        <div className={`lg:col-span-7 flex-col h-[540px] sm:h-[660px] glass-card rounded-2xl border border-white/10 overflow-hidden ${mobileTab === "chat" ? "flex" : "hidden lg:flex"}`}>
           {mode === "web" ? (
             /* WEB CHAT MODE */
             <>
@@ -261,6 +294,22 @@ Kanal Akses: ${mode === "web" ? "Hotline 119 Web Chat" : "SMS/USSD Gateway 3T"}`
                 >
                   <RefreshCw className="h-4 w-4" />
                 </button>
+              </div>
+
+              {/* Mobile Live Triage Quick Peek Bar */}
+              <div 
+                onClick={() => setMobileTab("triage")}
+                className="lg:hidden px-4 py-2 bg-black/40 border-b border-white/5 flex items-center justify-between text-xs cursor-pointer hover:bg-black/60 transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full" style={{ backgroundColor: currentEval.categoryColor }} />
+                  <span className="text-slate-300 text-[11px]">
+                    Triase AI: <strong style={{ color: currentEval.categoryColor }}>{currentEval.urgencyLevel}</strong> (Skor: {currentEval.urgencyScore}/100)
+                  </span>
+                </div>
+                <span className="text-[10px] text-orange-400 font-semibold underline">
+                  Lihat Protokol &rarr;
+                </span>
               </div>
 
               {/* Messages Feed */}
@@ -474,7 +523,7 @@ Kanal Akses: ${mode === "web" ? "Hotline 119 Web Chat" : "SMS/USSD Gateway 3T"}`
         </div>
 
         {/* Right Column: Live Triage Evaluation Engine */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className={`lg:col-span-5 space-y-6 ${mobileTab === "triage" ? "block" : "hidden lg:block"}`}>
           <div className="glass-card rounded-2xl p-6 border border-orange-500/30 space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center gap-2">

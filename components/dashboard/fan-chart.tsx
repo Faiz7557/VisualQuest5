@@ -215,12 +215,12 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
         </div>
 
         {/* Time Horizon Selector */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-semibold text-slate-400">Rentang Waktu:</span>
-          <div className="inline-flex rounded-xl bg-[#08111e] p-1 border border-white/10 text-xs">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar max-w-full pb-1 sm:pb-0">
+          <span className="text-[11px] font-semibold text-slate-400 shrink-0">Rentang:</span>
+          <div className="inline-flex rounded-xl bg-[#08111e] p-1 border border-white/10 text-xs shrink-0">
             <button
               onClick={() => setTimeRange("all")}
-              className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg font-semibold transition-all whitespace-nowrap ${
                 timeRange === "all" ? "bg-orange-500 text-white shadow-sm" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -228,7 +228,7 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
             </button>
             <button
               onClick={() => setTimeRange("forecast_focus")}
-              className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg font-semibold transition-all whitespace-nowrap ${
                 timeRange === "forecast_focus" ? "bg-orange-500 text-white shadow-sm" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -236,7 +236,7 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
             </button>
             <button
               onClick={() => setTimeRange("covid")}
-              className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-lg font-semibold transition-all whitespace-nowrap ${
                 timeRange === "covid" ? "bg-orange-500 text-white shadow-sm" : "text-slate-400 hover:text-white"
               }`}
             >
@@ -248,60 +248,60 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
 
       {/* 2. Multi-Model Overlay Checkboxes (Only visible in Volume metric) */}
       {selectedMetric === "volume" && timeRange !== "covid" && (
-        <div className="p-3.5 rounded-2xl bg-black/40 border border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs">
-          <div className="flex items-center gap-2 text-slate-300 font-semibold">
+        <div className="p-3.5 rounded-2xl bg-black/40 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-300 font-semibold shrink-0">
             <Layers className="h-4 w-4 text-orange-400" />
             <span>Bandingkan Trajektori Model Alternatif:</span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+          <div className="flex items-center gap-4 overflow-x-auto no-scrollbar py-1">
+            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white shrink-0">
               <input
                 type="checkbox"
                 checked={true}
                 disabled
                 className="accent-orange-500 rounded"
               />
-              <span className="flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5 whitespace-nowrap">
                 <span className="h-2 w-4 rounded-sm bg-orange-500" />
                 <strong className="text-orange-400">Ensemble (Utama)</strong>
               </span>
             </label>
 
-            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white shrink-0">
               <input
                 type="checkbox"
                 checked={showSarima}
                 onChange={(e) => setShowSarima(e.target.checked)}
                 className="accent-blue-500 rounded"
               />
-              <span className="flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5 whitespace-nowrap">
                 <span className="h-2 w-4 rounded-sm bg-blue-400" />
                 <span>SARIMA Univariat</span>
               </span>
             </label>
 
-            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white shrink-0">
               <input
                 type="checkbox"
                 checked={showEts}
                 onChange={(e) => setShowEts(e.target.checked)}
                 className="accent-purple-500 rounded"
               />
-              <span className="flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5 whitespace-nowrap">
                 <span className="h-2 w-4 rounded-sm bg-purple-400" />
                 <span>ETS (Holt-Winters)</span>
               </span>
             </label>
 
-            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+            <label className="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white shrink-0">
               <input
                 type="checkbox"
                 checked={showProphet}
                 onChange={(e) => setShowProphet(e.target.checked)}
                 className="accent-emerald-500 rounded"
               />
-              <span className="flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5 whitespace-nowrap">
                 <span className="h-2 w-4 rounded-sm bg-emerald-400" />
                 <span>Meta Prophet</span>
               </span>
@@ -311,7 +311,7 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
       )}
 
       {/* 3. Recharts Composed Canvas with Native Fanchart Range Areas */}
-      <div className="h-[460px] w-full pt-2">
+      <div className="h-[340px] sm:h-[420px] lg:h-[460px] w-full pt-2">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
             data={chartData}

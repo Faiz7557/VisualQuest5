@@ -228,7 +228,7 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
   }
 
   return (
-    <div className="h-[520px] w-full rounded-2xl overflow-hidden border border-white/10 relative">
+    <div className="h-[360px] sm:h-[460px] lg:h-[520px] w-full rounded-2xl overflow-hidden border border-white/10 relative">
       <MapContainer
         center={[-1.5, 118.0]}
         zoom={5}
@@ -300,16 +300,16 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
 
       {/* Floating Spatial Connectivity Badge Indicator */}
       {hoveredProvince && spatialConnections.length > 0 && (
-        <div className="absolute top-4 right-4 z-[400] glass-card rounded-xl px-4 py-2 border border-sky-400/40 text-xs shadow-2xl flex items-center gap-3 animate-in fade-in duration-200">
-          <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-sky-400 animate-ping" />
-            <span className="text-white font-bold">
+        <div className="absolute top-3 right-3 z-[400] glass-card rounded-xl px-3 py-1.5 sm:px-4 sm:py-2 border border-sky-400/40 text-[11px] sm:text-xs shadow-2xl flex items-center gap-2 sm:gap-3 animate-in fade-in duration-200 max-w-[85%] sm:max-w-md pointer-events-none">
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="h-2 w-2 rounded-full bg-sky-400 animate-ping" />
+            <span className="text-white font-bold truncate max-w-[90px] sm:max-w-none">
               {hoveredProvince.provinsi || (hoveredProvince as any).Provinsi}
             </span>
           </div>
-          <span className="text-slate-400">↔</span>
-          <div className="text-[11px] text-sky-300">
-            Jejaring Spasial k=4:{" "}
+          <span className="text-slate-400 hidden sm:inline">↔</span>
+          <div className="text-[10px] sm:text-[11px] text-sky-300 truncate">
+            <span className="hidden sm:inline">Jejaring k=4: </span>
             <span className="font-semibold text-white">
               {spatialConnections.map((c) => c.name).join(", ")}
             </span>
