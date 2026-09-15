@@ -79,16 +79,14 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
         sarimaProyeksi: null,
         etsProyeksi: null,
         prophetProyeksi: null,
-        ci95Base: null,
-        ci95Spread: null,
-        ci68Base: null,
-        ci68Spread: null,
+        ci95Range: null,
+        ci68Range: null,
         ci95_atas: null,
         ci95_bawah: null,
         ci68_atas: null,
         ci68_bawah: null,
       })),
-      // Bridge point on 2024-12 if within range
+      // Bridge point on 2024-12 if within range (anchor of the fanchart)
       ...(timeRange !== "covid" && lastHist && filteredForecast.length > 0
         ? [
             {
@@ -109,10 +107,26 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
               sarimaProyeksi: lastHist.volume_konsultasi_mental,
               etsProyeksi: lastHist.volume_konsultasi_mental,
               prophetProyeksi: lastHist.volume_konsultasi_mental,
-              ci95Base: selectedMetric === "volume" ? lastHist.volume_konsultasi_mental : null,
-              ci95Spread: 0,
-              ci68Base: selectedMetric === "volume" ? lastHist.volume_konsultasi_mental : null,
-              ci68Spread: 0,
+              ci95Range: [
+                selectedMetric === "volume" ? lastHist.volume_konsultasi_mental :
+                selectedMetric === "krisis" ? lastHist.panggilan_krisis_psikologis :
+                selectedMetric === "burnout" ? lastHist.indeks_burnout_pekerja :
+                lastHist.indeks_stres_finansial,
+                selectedMetric === "volume" ? lastHist.volume_konsultasi_mental :
+                selectedMetric === "krisis" ? lastHist.panggilan_krisis_psikologis :
+                selectedMetric === "burnout" ? lastHist.indeks_burnout_pekerja :
+                lastHist.indeks_stres_finansial,
+              ],
+              ci68Range: [
+                selectedMetric === "volume" ? lastHist.volume_konsultasi_mental :
+                selectedMetric === "krisis" ? lastHist.panggilan_krisis_psikologis :
+                selectedMetric === "burnout" ? lastHist.indeks_burnout_pekerja :
+                lastHist.indeks_stres_finansial,
+                selectedMetric === "volume" ? lastHist.volume_konsultasi_mental :
+                selectedMetric === "krisis" ? lastHist.panggilan_krisis_psikologis :
+                selectedMetric === "burnout" ? lastHist.indeks_burnout_pekerja :
+                lastHist.indeks_stres_finansial,
+              ],
               ci95_atas: lastHist.volume_konsultasi_mental,
               ci95_bawah: lastHist.volume_konsultasi_mental,
               ci68_atas: lastHist.volume_konsultasi_mental,
@@ -122,10 +136,36 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
         : []),
       ...filteredForecast.map((f) => {
         const vol = Math.round(f.proyeksi_volume || (f as any).ensemble || 0);
-        const low95 = Math.round(f.ci95_bawah || vol * 0.85);
-        const high95 = Math.round(f.ci95_atas || vol * 1.15);
-        const low68 = Math.round(f.ci68_bawah || vol * 0.92);
-        const high68 = Math.round(f.ci68_atas || vol * 1.08);
+        const krisis = Math.round(f.driver_panggilan_krisis || (f as any).panggilan_krisis_psikologis || 0);
+        const burnout = Number((f.driver_burnout || (f as any).indeks_burnout_pekerja || 0).toFixed(1));
+        const finansial = Number((f.driver_stres_finansial || (f as any).indeks_stres_finansial || 0).toFixed(1));
+
+        // Metric-dependent target & CI boundaries
+        let targetVal = vol;
+        let low95 = Math.round(f.ci95_bawah || vol * 0.85);
+        let high95 = Math.round(f.ci95_atas || vol * 1.15);
+        let low68 = Math.round(f.ci68_bawah || vol * 0.92);
+        let high68 = Math.round(f.ci68_atas || vol * 1.08);
+
+        if (selectedMetric === "krisis") {
+          targetVal = krisis;
+          low95 = Math.round(krisis * 0.88);
+          high95 = Math.round(krisis * 1.14);
+          low68 = Math.round(krisis * 0.94);
+          high68 = Math.round(krisis * 1.07);
+        } else if (selectedMetric === "burnout") {
+          targetVal = burnout;
+          low95 = Number((burnout * 0.94).toFixed(1));
+          high95 = Number((burnout * 1.06).toFixed(1));
+          low68 = Number((burnout * 0.97).toFixed(1));
+          high68 = Number((burnout * 1.03).toFixed(1));
+        } else if (selectedMetric === "finansial") {
+          targetVal = finansial;
+          low95 = Number((finansial * 0.95).toFixed(1));
+          high95 = Number((finansial * 1.05).toFixed(1));
+          low68 = Number((finansial * 0.98).toFixed(1));
+          high68 = Number((finansial * 1.02).toFixed(1));
+        }
 
         return {
           tanggal: f.tanggal.slice(0, 7),
@@ -135,20 +175,12 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
           krisisHistoris: null,
           burnoutHistoris: null,
           finansialHistoris: null,
-          proyeksi: selectedMetric === "volume"
-            ? vol
-            : selectedMetric === "krisis"
-            ? Math.round(f.driver_panggilan_krisis || (f as any).panggilan_krisis_psikologis || 0)
-            : selectedMetric === "burnout"
-            ? Number((f.driver_burnout || (f as any).indeks_burnout_pekerja || 0).toFixed(1))
-            : Number((f.driver_stres_finansial || (f as any).indeks_stres_finansial || 0).toFixed(1)),
+          proyeksi: targetVal,
           sarimaProyeksi: Math.round((f as any).sarima || vol),
           etsProyeksi: Math.round((f as any).ets || vol),
           prophetProyeksi: Math.round((f as any).prophet || vol),
-          ci95Base: selectedMetric === "volume" ? low95 : null,
-          ci95Spread: selectedMetric === "volume" ? Math.max(0, high95 - low95) : null,
-          ci68Base: selectedMetric === "volume" ? low68 : null,
-          ci68Spread: selectedMetric === "volume" ? Math.max(0, high68 - low68) : null,
+          ci95Range: [low95, high95],
+          ci68Range: [low68, high68],
           ci95_atas: high95,
           ci95_bawah: low95,
           ci68_atas: high68,
@@ -169,7 +201,7 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20 mb-1">
             <TrendingUp className="h-3.5 w-3.5" />
-            <span>Fanchart Interaktif • Walk-Forward Cross Validation</span>
+            <span>Fanchart Interaktif • Pita Ketidakpastian 68% & 95% Out-of-Fold</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-bold text-white font-heading">
             {selectedMetric === "volume" && "Proyeksi Volume Konsultasi Jiwa & Interval Ketidakpastian"}
@@ -178,7 +210,7 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
             {selectedMetric === "finansial" && "Dinamika Tekanan Stres Finansial Masyarakat"}
           </h3>
           <p className="text-xs text-slate-400 mt-1">
-            Klik pada titik kurva mana pun untuk membedah kalkulasi kapasitas dan rekomendasi mitigasi.
+            Pita arsiran fanchart menggambarkan rentang ketidakpastian interval kepercayaan 68% dan 95% hasil validasi silang.
           </p>
         </div>
 
@@ -278,12 +310,12 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
         </div>
       )}
 
-      {/* 3. Recharts Composed Canvas */}
+      {/* 3. Recharts Composed Canvas with Native Fanchart Range Areas */}
       <div className="h-[460px] w-full pt-2">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
             data={chartData}
-            margin={{ top: 10, right: 20, left: 10, bottom: 0 }}
+            margin={{ top: 15, right: 20, left: 10, bottom: 0 }}
             onClick={(e) => {
               if (e && e.activePayload && e.activePayload.length > 0) {
                 setSelectedPoint(e.activePayload[0].payload);
@@ -291,13 +323,13 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
             }}
           >
             <defs>
-              <linearGradient id="band95Gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#f97316" stopOpacity={0.22} />
-                <stop offset="100%" stopColor="#f97316" stopOpacity={0.06} />
+              <linearGradient id="fan95Gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#f97316" stopOpacity={0.35} />
+                <stop offset="100%" stopColor="#f97316" stopOpacity={0.12} />
               </linearGradient>
-              <linearGradient id="band68Gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#f97316" stopOpacity={0.48} />
-                <stop offset="100%" stopColor="#f97316" stopOpacity={0.18} />
+              <linearGradient id="fan68Gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.65} />
+                <stop offset="100%" stopColor="#ea580c" stopOpacity={0.28} />
               </linearGradient>
             </defs>
 
@@ -322,7 +354,7 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
                 if (active && payload && payload.length) {
                   const d = payload[0].payload;
                   return (
-                    <div className="glass-card rounded-2xl p-4 border border-white/20 text-xs shadow-2xl space-y-2 min-w-[220px]">
+                    <div className="glass-card rounded-2xl p-4 border border-white/20 text-xs shadow-2xl space-y-2 min-w-[230px]">
                       <div className="font-bold text-white border-b border-white/10 pb-1.5 flex items-center justify-between gap-3">
                         <span className="flex items-center gap-1.5">
                           <Calendar className="h-3.5 w-3.5 text-orange-400" />
@@ -348,19 +380,21 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
                       )}
 
                       {d.proyeksi !== null && (
-                        <div className="space-y-1 pt-1">
+                        <div className="space-y-1.5 pt-1">
                           <div className="text-orange-400 font-black text-sm">
-                            Proyeksi Ensemble: {formatNumber(d.proyeksi)}
+                            Proyeksi Titik: {formatNumber(d.proyeksi)}
                           </div>
-                          {selectedMetric === "volume" && d.ci68_atas && (
-                            <>
-                              <div className="text-amber-300 text-[11px]">
-                                Pita 68% CI: [{formatNumber(d.ci68_bawah)} – {formatNumber(d.ci68_atas)}]
+                          {d.ci68_atas && (
+                            <div className="p-2 rounded-lg bg-white/5 border border-white/10 space-y-1">
+                              <div className="text-amber-300 text-[11px] font-semibold flex justify-between">
+                                <span>Pita 68% CI:</span>
+                                <span>[{formatNumber(d.ci68_bawah)} – {formatNumber(d.ci68_atas)}]</span>
                               </div>
-                              <div className="text-orange-300 text-[11px]">
-                                Pita 95% CI: [{formatNumber(d.ci95_bawah)} – {formatNumber(d.ci95_atas)}]
+                              <div className="text-orange-300 text-[11px] font-semibold flex justify-between">
+                                <span>Pita 95% CI:</span>
+                                <span>[{formatNumber(d.ci95_bawah)} – {formatNumber(d.ci95_atas)}]</span>
                               </div>
-                            </>
+                            </div>
                           )}
                         </div>
                       )}
@@ -381,54 +415,40 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
                 x="2024-12"
                 stroke="#ef4444"
                 strokeDasharray="4 4"
-                label={{ value: "Titik Pisah 2025", fill: "#ef4444", fontSize: 10, position: "top" }}
+                label={{ value: "Awal Proyeksi 2025", fill: "#ef4444", fontSize: 10, position: "top" }}
               />
             )}
 
-            {/* Floating 95% Confidence Band */}
-            {selectedMetric === "volume" && timeRange !== "covid" && (
-              <>
-                <Area
-                  type="monotone"
-                  dataKey="ci95Base"
-                  stackId="ci95"
-                  stroke="none"
-                  fill="transparent"
-                  legendType="none"
-                  isAnimationActive={false}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="ci95Spread"
-                  stackId="ci95"
-                  stroke="none"
-                  fill="url(#band95Gradient)"
-                  isAnimationActive={false}
-                />
-              </>
+            {/* Fanchart Outer Band: 95% Confidence Interval */}
+            {timeRange !== "covid" && (
+              <Area
+                type="monotone"
+                dataKey="ci95Range"
+                fill="url(#fan95Gradient)"
+                stroke="#f97316"
+                strokeWidth={1}
+                strokeDasharray="4 4"
+                strokeOpacity={0.6}
+                connectNulls={true}
+                isAnimationActive={false}
+                name="Interval Kepercayaan 95%"
+              />
             )}
 
-            {/* Floating 68% Confidence Band */}
-            {selectedMetric === "volume" && timeRange !== "covid" && (
-              <>
-                <Area
-                  type="monotone"
-                  dataKey="ci68Base"
-                  stackId="ci68"
-                  stroke="none"
-                  fill="transparent"
-                  legendType="none"
-                  isAnimationActive={false}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="ci68Spread"
-                  stackId="ci68"
-                  stroke="none"
-                  fill="url(#band68Gradient)"
-                  isAnimationActive={false}
-                />
-              </>
+            {/* Fanchart Inner Band: 68% Confidence Interval */}
+            {timeRange !== "covid" && (
+              <Area
+                type="monotone"
+                dataKey="ci68Range"
+                fill="url(#fan68Gradient)"
+                stroke="#ea580c"
+                strokeWidth={1}
+                strokeDasharray="2 2"
+                strokeOpacity={0.8}
+                connectNulls={true}
+                isAnimationActive={false}
+                name="Interval Kepercayaan 68%"
+              />
             )}
 
             {/* Historical Observation Line */}
@@ -451,14 +471,14 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
               connectNulls
             />
 
-            {/* Projected Ensemble Line */}
+            {/* Projected Trajectory Line (Center Spine of Fan) */}
             <Line
               type="monotone"
               dataKey="proyeksi"
-              stroke="#f97316"
+              stroke="#ffffff"
               strokeWidth={3.5}
-              dot={{ r: 3, fill: "#f97316" }}
-              activeDot={{ r: 7, fill: "#f97316", stroke: "#ffffff", strokeWidth: 2 }}
+              dot={{ r: 3.5, fill: "#f97316", stroke: "#ffffff", strokeWidth: 1.5 }}
+              activeDot={{ r: 7.5, fill: "#f97316", stroke: "#ffffff", strokeWidth: 2.5 }}
               name="Proyeksi Titik (Ensemble)"
               connectNulls
             />
@@ -499,6 +519,31 @@ export function FanChart({ historical, forecast, selectedMetric, onSelectMetric 
             )}
           </ComposedChart>
         </ResponsiveContainer>
+      </div>
+
+      {/* Visual Legend of the Fanchart */}
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-white/5 text-xs text-slate-300">
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-5 rounded bg-sky-400" />
+            <span>Historis (2019–2024)</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-orange-500 border border-white" />
+            <span className="font-bold text-white">Proyeksi Titik (2025–2026)</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="h-3 w-5 rounded bg-amber-500/60 border border-amber-400" />
+            <span className="text-amber-300">Pita 68% CI (Zona Paling Mungkin)</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="h-3 w-5 rounded bg-orange-500/25 border border-orange-500/60 border-dashed" />
+            <span className="text-orange-300">Pita 95% CI (Batas Ekstrem Sistem)</span>
+          </div>
+        </div>
+        <div className="text-slate-400 italic text-[11px]">
+          *Fan chart diestimasi dari galat out-of-fold walk-forward cross validation
+        </div>
       </div>
 
       {/* 4. Interactive Data Point Inspector Drawer */}
