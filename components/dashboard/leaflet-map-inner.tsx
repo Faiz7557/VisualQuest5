@@ -144,64 +144,6 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
     const provName = feature.properties.PROVINSI || feature.properties.provinsi || feature.properties.NAME_1 || "";
     const p = provMap.get(provName.toUpperCase().trim());
 
-    if (p) {
-      const pName = p.provinsi || (p as any).Provinsi || provName;
-      const clusterId = Number(p.klaster);
-      const clusterInfo = CLUSTERS[clusterId];
-      const clusterColor = clusterInfo?.color || "#38bdf8";
-      const clusterName = p.nama_klaster || clusterInfo?.name || `Klaster ${clusterId}`;
-      const hp = Number(p.hp_seluler_2024 || 0).toFixed(1);
-      const ipm = Number(p.ipm_2024 || 0).toFixed(1);
-      const rank = p.peringkat || (p as any).rank || "-";
-      const ikad = Number(p.skor_kerentanan || (p as any).indeks_kerentanan || 0).toFixed(3);
-      const lisa = p.kategori_lisa || (p as any).lisa_q || (p as any).lisa || "Tidak Signifikan";
-
-      // Rich Modern Glassmorphism Tooltip Card
-      layer.bindTooltip(
-        `
-        <div style="background: rgba(11, 20, 38, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 14px; box-shadow: 0 15px 30px rgba(0,0,0,0.6); min-width: 250px; font-family: sans-serif; color: #f1f5f9;">
-          <!-- Header -->
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
-            <div>
-              <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8;">Wilayah Spasial • #${rank}</div>
-              <div style="font-size: 15px; font-weight: 800; color: #ffffff; margin-top: 1px;">${pName}</div>
-            </div>
-            <span style="font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 9999px; background: ${clusterColor}20; color: ${clusterColor}; border: 1px solid ${clusterColor}45; white-space: nowrap;">
-              ${clusterName}
-            </span>
-          </div>
-
-          <!-- Stats Grid -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; margin-bottom: 10px;">
-            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 8px;">
-              <span style="color: #94a3b8; font-size: 10px; display: block;">Ponsel (2024)</span>
-              <strong style="color: #38bdf8; font-size: 13px;">${hp}%</strong>
-            </div>
-            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 8px;">
-              <span style="color: #94a3b8; font-size: 10px; display: block;">IPM 2024</span>
-              <strong style="color: #10b981; font-size: 13px;">${ipm}</strong>
-            </div>
-            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 8px;">
-              <span style="color: #94a3b8; font-size: 10px; display: block;">Skor IKAD</span>
-              <strong style="color: #f97316; font-size: 13px;">${ikad}</strong>
-            </div>
-            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 8px;">
-              <span style="color: #94a3b8; font-size: 10px; display: block;">Pola LISA</span>
-              <strong style="color: #e2e8f0; font-size: 11px;">${lisa}</strong>
-            </div>
-          </div>
-
-          <!-- Footer Connectivity Cue -->
-          <div style="font-size: 10px; color: #38bdf8; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 6px; display: flex; align-items: center; justify-content: space-between;">
-            <span>✦ Terhubung spasial k=4 tetangga</span>
-            <span style="color: #64748b; font-size: 9px;">Klik poligon</span>
-          </div>
-        </div>
-        `,
-        { sticky: true, opacity: 1, className: "leaflet-rich-card-tooltip" }
-      );
-    }
-
     layer.on({
       click: () => {
         if (p && onSelectProvince) {
@@ -298,21 +240,89 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
         )}
       </MapContainer>
 
-      {/* Floating Spatial Connectivity Badge Indicator */}
-      {hoveredProvince && spatialConnections.length > 0 && (
-        <div className="absolute top-3 right-3 z-[400] glass-card rounded-xl px-3 py-1.5 sm:px-4 sm:py-2 border border-sky-400/40 text-[11px] sm:text-xs shadow-2xl flex items-center gap-2 sm:gap-3 animate-in fade-in duration-200 max-w-[85%] sm:max-w-md pointer-events-none">
-          <div className="flex items-center gap-1.5 shrink-0">
-            <span className="h-2 w-2 rounded-full bg-sky-400 animate-ping" />
-            <span className="text-white font-bold truncate max-w-[90px] sm:max-w-none">
-              {hoveredProvince.provinsi || (hoveredProvince as any).Provinsi}
+      {/* Floating Hover Card HUD - Pinned to corner so it NEVER blocks the hovered province or dashed lines */}
+      {hoveredProvince && (
+        <div
+          className={`absolute z-[400] glass-card rounded-2xl p-3.5 sm:p-4 border border-white/20 shadow-2xl animate-in fade-in duration-200 pointer-events-none w-[calc(100%-24px)] sm:w-[310px] ${
+            (hoveredProvince.lon || 0) > 130
+              ? "bottom-3 left-3 sm:bottom-auto sm:top-3 sm:left-14 sm:right-auto"
+              : "bottom-3 left-3 sm:bottom-auto sm:top-3 sm:right-3 sm:left-auto"
+          }`}
+        >
+          {/* Header */}
+          <div className="flex items-start justify-between gap-2 pb-2 mb-2.5 border-b border-white/10">
+            <div>
+              <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block">
+                Wilayah Spasial • #{hoveredProvince.peringkat || (hoveredProvince as any).rank || "-"}
+              </span>
+              <h4 className="text-sm sm:text-base font-extrabold text-white font-heading leading-tight mt-0.5">
+                {hoveredProvince.provinsi || (hoveredProvince as any).Provinsi}
+              </h4>
+            </div>
+            <span
+              className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0 whitespace-nowrap"
+              style={{
+                color: CLUSTERS[Number(hoveredProvince.klaster)]?.color || "#38bdf8",
+                borderColor: `${CLUSTERS[Number(hoveredProvince.klaster)]?.color || "#38bdf8"}45`,
+                backgroundColor: `${CLUSTERS[Number(hoveredProvince.klaster)]?.color || "#38bdf8"}20`,
+              }}
+            >
+              {CLUSTERS[Number(hoveredProvince.klaster)]?.name || `Klaster ${hoveredProvince.klaster}`}
             </span>
           </div>
-          <span className="text-slate-400 hidden sm:inline">↔</span>
-          <div className="text-[10px] sm:text-[11px] text-sky-300 truncate">
-            <span className="hidden sm:inline">Jejaring k=4: </span>
-            <span className="font-semibold text-white">
-              {spatialConnections.map((c) => c.name).join(", ")}
-            </span>
+
+          {/* 4 Stat Boxes Grid */}
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-xs mb-2.5">
+            <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+              <span className="text-[10px] text-slate-400 block">Ponsel (2024)</span>
+              <strong className="text-sky-300 font-bold text-xs sm:text-sm">
+                {Number(hoveredProvince.hp_seluler_2024 || 0).toFixed(1)}%
+              </strong>
+            </div>
+            <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+              <span className="text-[10px] text-slate-400 block">IPM 2024</span>
+              <strong className="text-emerald-400 font-bold text-xs sm:text-sm">
+                {Number(hoveredProvince.ipm_2024 || 0).toFixed(1)}
+              </strong>
+            </div>
+            <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+              <span className="text-[10px] text-slate-400 block">Skor IKAD</span>
+              <strong className="text-orange-400 font-bold text-xs sm:text-sm">
+                {Number(hoveredProvince.skor_kerentanan || (hoveredProvince as any).indeks_kerentanan || 0).toFixed(3)}
+              </strong>
+            </div>
+            <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+              <span className="text-[10px] text-slate-400 block">Pola LISA</span>
+              <strong className="text-slate-200 font-bold text-[11px] sm:text-xs truncate block">
+                {hoveredProvince.kategori_lisa || (hoveredProvince as any).lisa_q || (hoveredProvince as any).lisa || "Tidak Signifikan"}
+              </strong>
+            </div>
+          </div>
+
+          {/* Connected Neighbors (k=4) */}
+          {spatialConnections.length > 0 && (
+            <div className="space-y-1.5 pt-2 border-t border-white/10 text-[11px]">
+              <div className="flex items-center gap-1.5 text-sky-400 font-semibold text-[10px]">
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-400 animate-ping" />
+                <span>Jejaring Spasial k=4 Terhubung:</span>
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {spatialConnections.map((c, i) => (
+                  <span
+                    key={i}
+                    className="px-2 py-0.5 rounded-md bg-sky-500/15 border border-sky-500/30 text-[10px] font-medium text-sky-200"
+                  >
+                    {c.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Footer Cue */}
+          <div className="pt-2 mt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-500">
+            <span>✦ Visualisasi Spasial k=4</span>
+            <span className="text-orange-400/80">Klik poligon untuk audit</span>
           </div>
         </div>
       )}
