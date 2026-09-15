@@ -29,7 +29,6 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
     const name = (p.provinsi || (p as any).Provinsi || "").toUpperCase().trim();
     if (name) {
       provMap.set(name, p);
-      // Handle alternative naming
       if (name === "KEPULAUAN BANGKA BELITUNG") provMap.set("KEP. BANGKA BELITUNG", p);
       if (name === "DAERAH ISTIMEWA YOGYAKARTA") provMap.set("DI YOGYAKARTA", p);
       if (name === "DKI JAKARTA") provMap.set("JAKARTA", p);
@@ -97,7 +96,7 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
       opacity: 1,
       color: isSelected ? "#ffffff" : "rgba(255,255,255,0.25)",
       dashArray: "",
-      fillOpacity: isSelected ? 0.95 : 0.75,
+      fillOpacity: isSelected ? 0.95 : 0.78,
     };
   }
 
@@ -156,11 +155,14 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
         center={[-1.5, 118.0]}
         zoom={5}
         scrollWheelZoom={false}
+        attributionControl={false}
         className="h-full w-full"
       >
+        {/* Esri World Dark Gray Canvas: 100% Bebas Watermark CartoDB */}
         <TileLayer
-          attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; Esri'
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+          maxZoom={16}
         />
         {geoData && (
           <GeoJSON
