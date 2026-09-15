@@ -1,18 +1,30 @@
-﻿export interface ProvinceData {
+export interface ProvinceData {
   provinsi: string;
+  Provinsi?: string;
   hp_seluler_2024: number;
   rls_2024: number;
   ipm_2024: number;
   pdrb_kapita_2024: number;
   tpt_2024: number;
-  pc1: number;
-  pc2: number;
+  pc1?: number;
+  pc2?: number;
   klaster: number;
   nama_klaster: string;
   skor_kerentanan: number;
+  indeks_kerentanan?: number;
   peringkat: number;
-  kategori_kerentanan: "Rendah" | "Sedang" | "Tinggi" | "Sangat Tinggi";
-  kategori_lisa: "High-High" | "Low-Low" | "Low-High" | "Tidak Signifikan";
+  kategori_kerentanan: string;
+  kategori?: string;
+  kategori_lisa: string;
+  lisa_q?: string;
+  lisa_p?: number;
+  lisa?: string;
+  lat?: number;
+  lon?: number;
+  gwr_rls_2024?: number;
+  gwr_ipm_2024?: number;
+  gwr_pdrb_log?: number;
+  gwr_tpt_2024?: number;
 }
 
 export interface ClusterInfo {
@@ -53,6 +65,10 @@ export interface HistoricalPoint {
 export interface ForecastPoint {
   tanggal: string;
   proyeksi_volume: number;
+  ensemble?: number;
+  sarima?: number;
+  ets?: number;
+  prophet?: number;
   ci68_bawah: number;
   ci68_atas: number;
   ci95_bawah: number;
@@ -64,15 +80,16 @@ export interface ForecastPoint {
 
 export interface ForecastModelCV {
   model: string;
-  horizon: "h=3" | "h=12";
+  h?: number;
+  horizon: string;
   mape: number;
   rmse: number;
-  mae: number;
+  mae?: number;
   smape: number;
 }
 
 export interface TriageEvaluation {
-  urgencyScore: number; // 0-100
+  urgencyScore: number;
   urgencyLevel: "Rendah" | "Sedang" | "Kritis";
   categoryColor: string;
   detectedKeywords: string[];

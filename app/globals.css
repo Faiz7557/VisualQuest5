@@ -57,6 +57,21 @@ body {
   background: #0f172a !important;
 }
 
+/* Leaflet Rich Card Tooltip Custom */
+.leaflet-tooltip.leaflet-rich-card-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.leaflet-tooltip-top.leaflet-rich-card-tooltip:before,
+.leaflet-tooltip-bottom.leaflet-rich-card-tooltip:before,
+.leaflet-tooltip-left.leaflet-rich-card-tooltip:before,
+.leaflet-tooltip-right.leaflet-rich-card-tooltip:before {
+  display: none !important;
+}
+
 /* Glassmorphism utility */
 .glass-panel {
   background: rgba(13, 27, 42, 0.7);
