@@ -1,5 +1,5 @@
-﻿import Link from "next/link";
-import { HeartHandshake, ShieldCheck, Sparkles, Database } from "lucide-react";
+import Link from "next/link";
+import { ShieldCheck, Database } from "lucide-react";
 
 export function Footer() {
   return (
@@ -8,10 +8,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Col 1 */}
           <div className="space-y-3 md:col-span-2">
-            <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-500 text-white">
-                <HeartHandshake className="h-4 w-4" />
-              </div>
+            <div className="flex items-center gap-2.5">
+              <img
+                src="/images/iris-logo.png"
+                alt="Logo Tim IRIS"
+                className="h-8 w-8 object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]"
+              />
               <span className="font-heading font-bold text-white text-base tracking-tight">
                 SEJIWA<span className="text-orange-500">+</span>
               </span>
@@ -40,8 +42,7 @@ export function Footer() {
 
           {/* Col 3 */}
           <div className="space-y-2">
-            <h4 className="font-semibold text-slate-200">Kredensial Kompetisi</h4>
-            <p className="text-slate-400">Visual Quest 5.0 (Dataquest 2026)</p>
+            <h4 className="font-semibold text-slate-200">Kredensial Pengembang</h4>
             <p className="text-slate-400">Tim: <strong className="text-slate-200 font-medium">IRIS</strong></p>
             <p className="text-slate-400">Institusi: <strong className="text-slate-200 font-medium">Universitas Airlangga</strong></p>
             <p className="text-slate-400">Kemenkes RI Hotline: <strong className="text-orange-400">119 ext 8</strong></p>
