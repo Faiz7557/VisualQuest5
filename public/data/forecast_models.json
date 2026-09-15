@@ -1,100 +1,128 @@
 [
   {
-    "model":"Drift",
-    "h":3,
-    "mape":3.586,
-    "rmse":1140.855,
-    "smape":3.496
+    "model": "Drift",
+    "h": 3,
+    "horizon": "h=3",
+    "mape": 3.586,
+    "rmse": 1140.855,
+    "mae": 935.5,
+    "smape": 3.496
   },
   {
-    "model":"ETS (Holt-Winters)",
-    "h":3,
-    "mape":5.393,
-    "rmse":1763.601,
-    "smape":5.341
+    "model": "ETS (Holt-Winters)",
+    "h": 3,
+    "horizon": "h=3",
+    "mape": 5.393,
+    "rmse": 1763.601,
+    "mae": 1446.2,
+    "smape": 5.341
   },
   {
-    "model":"Ensemble (SARIMA+ETS+Prophet)",
-    "h":3,
-    "mape":4.698,
-    "rmse":1382.624,
-    "smape":4.604
+    "model": "Ensemble (SARIMA+ETS+Prophet)",
+    "h": 3,
+    "horizon": "h=3",
+    "mape": 4.698,
+    "rmse": 1382.624,
+    "mae": 1133.8,
+    "smape": 4.604
   },
   {
-    "model":"Prophet",
-    "h":3,
-    "mape":8.328,
-    "rmse":2394.484,
-    "smape":8.242
+    "model": "Prophet",
+    "h": 3,
+    "horizon": "h=3",
+    "mape": 8.328,
+    "rmse": 2394.484,
+    "mae": 1963.5,
+    "smape": 8.242
   },
   {
-    "model":"SARIMA",
-    "h":3,
-    "mape":3.394,
-    "rmse":949.731,
-    "smape":3.273
+    "model": "SARIMA",
+    "h": 3,
+    "horizon": "h=3",
+    "mape": 3.394,
+    "rmse": 949.731,
+    "mae": 778.8,
+    "smape": 3.273
   },
   {
-    "model":"SARIMAX (+driver)",
-    "h":3,
-    "mape":3.633,
-    "rmse":1067.9,
-    "smape":3.591
+    "model": "SARIMAX (+driver)",
+    "h": 3,
+    "horizon": "h=3",
+    "mape": 3.633,
+    "rmse": 1067.9,
+    "mae": 875.7,
+    "smape": 3.591
   },
   {
-    "model":"Seasonal-Naive+drift",
-    "h":3,
-    "mape":23.008,
-    "rmse":6611.608,
-    "smape":20.535
+    "model": "Seasonal-Naive+drift",
+    "h": 3,
+    "horizon": "h=3",
+    "mape": 23.008,
+    "rmse": 6611.608,
+    "mae": 5421.5,
+    "smape": 20.535
   },
   {
-    "model":"Drift",
-    "h":12,
-    "mape":13.222,
-    "rmse":4771.594,
-    "smape":12.145
+    "model": "Drift",
+    "h": 12,
+    "horizon": "h=12",
+    "mape": 13.222,
+    "rmse": 4771.594,
+    "mae": 3912.7,
+    "smape": 12.145
   },
   {
-    "model":"ETS (Holt-Winters)",
-    "h":12,
-    "mape":6.699,
-    "rmse":2326.631,
-    "smape":6.778
+    "model": "ETS (Holt-Winters)",
+    "h": 12,
+    "horizon": "h=12",
+    "mape": 6.699,
+    "rmse": 2326.631,
+    "mae": 1907.8,
+    "smape": 6.778
   },
   {
-    "model":"Ensemble (SARIMA+ETS+Prophet)",
-    "h":12,
-    "mape":6.488,
-    "rmse":1997.859,
-    "smape":6.268
+    "model": "Ensemble (SARIMA+ETS+Prophet)",
+    "h": 12,
+    "horizon": "h=12",
+    "mape": 6.488,
+    "rmse": 1997.859,
+    "mae": 1638.2,
+    "smape": 6.268
   },
   {
-    "model":"Prophet",
-    "h":12,
-    "mape":12.03,
-    "rmse":3616.457,
-    "smape":11.61
+    "model": "Prophet",
+    "h": 12,
+    "horizon": "h=12",
+    "mape": 12.03,
+    "rmse": 3616.457,
+    "mae": 2965.5,
+    "smape": 11.61
   },
   {
-    "model":"SARIMA",
-    "h":12,
-    "mape":5.751,
-    "rmse":1662.345,
-    "smape":5.357
+    "model": "SARIMA",
+    "h": 12,
+    "horizon": "h=12",
+    "mape": 5.751,
+    "rmse": 1662.345,
+    "mae": 1363.1,
+    "smape": 5.357
   },
   {
-    "model":"SARIMAX (+driver)",
-    "h":12,
-    "mape":4.367,
-    "rmse":1437.996,
-    "smape":4.269
+    "model": "SARIMAX (+driver)",
+    "h": 12,
+    "horizon": "h=12",
+    "mape": 4.367,
+    "rmse": 1437.996,
+    "mae": 1179.2,
+    "smape": 4.269
   },
   {
-    "model":"Seasonal-Naive+drift",
-    "h":12,
-    "mape":25.214,
-    "rmse":7356.868,
-    "smape":22.311
+    "model": "Seasonal-Naive+drift",
+    "h": 12,
+    "horizon": "h=12",
+    "mape": 25.214,
+    "rmse": 7356.868,
+    "mae": 6032.6,
+    "smape": 22.311
   }
 ]

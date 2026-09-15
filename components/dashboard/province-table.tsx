@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import { useState, useMemo } from "react";
 import { ProvinceData } from "@/types/data";
 import { CLUSTERS } from "@/lib/constants";
-import { Search, ArrowUpDown, Filter } from "lucide-react";
+import { Search, ArrowUpDown } from "lucide-react";
 import { formatNumber } from "@/lib/utils";
 
 interface Props {
@@ -15,29 +15,36 @@ interface Props {
 
 export function ProvinceTable({ provinces, selectedProvince, onSelectProvince, filterCluster }: Props) {
   const [search, setSearch] = useState("");
-  const [sortKey, setSortKey] = useState<keyof ProvinceData>("peringkat");
+  const [sortKey, setSortKey] = useState<string>("peringkat");
   const [sortAsc, setSortAsc] = useState(true);
 
   const filtered = useMemo(() => {
     return provinces
       .filter((p) => {
-        const matchSearch = p.provinsi.toLowerCase().includes(search.toLowerCase());
-        const matchCluster = filterCluster === null || p.klaster === filterCluster;
+        const name = p.provinsi || (p as any).Provinsi || "";
+        const matchSearch = name.toLowerCase().includes(search.toLowerCase());
+        const matchCluster = filterCluster === null || Number(p.klaster) === filterCluster;
         return matchSearch && matchCluster;
       })
       .sort((a, b) => {
-        const valA = a[sortKey];
-        const valB = b[sortKey];
+        let valA: any = (a as any)[sortKey];
+        let valB: any = (b as any)[sortKey];
+
+        if (sortKey === "provinsi") {
+          valA = a.provinsi || (a as any).Provinsi || "";
+          valB = b.provinsi || (b as any).Provinsi || "";
+        }
+
         if (typeof valA === "number" && typeof valB === "number") {
           return sortAsc ? valA - valB : valB - valA;
         }
         return sortAsc
-          ? String(valA).localeCompare(String(valB))
-          : String(valB).localeCompare(String(valA));
+          ? String(valA || "").localeCompare(String(valB || ""))
+          : String(valB || "").localeCompare(String(valA || ""));
       });
   }, [provinces, search, filterCluster, sortKey, sortAsc]);
 
-  function handleSort(key: keyof ProvinceData) {
+  function handleSort(key: string) {
     if (sortKey === key) {
       setSortAsc(!sortAsc);
     } else {
@@ -122,12 +129,16 @@ export function ProvinceTable({ provinces, selectedProvince, onSelectProvince, f
           </thead>
           <tbody className="divide-y divide-white/5">
             {filtered.map((p) => {
-              const isSelected = selectedProvince?.provinsi === p.provinsi;
-              const clusterInfo = CLUSTERS[p.klaster];
+              const pName = p.provinsi || (p as any).Provinsi;
+              const isSelected = (selectedProvince?.provinsi || (selectedProvince as any)?.Provinsi) === pName;
+              const clusterId = Number(p.klaster);
+              const clusterInfo = CLUSTERS[clusterId];
+              const katKerentanan = p.kategori_kerentanan || (p as any).kategori || "Sedang";
+              const katLisa = p.kategori_lisa || (p as any).lisa_q || (p as any).lisa || "Tidak Signifikan";
 
               return (
                 <tr
-                  key={p.provinsi}
+                  key={pName}
                   onClick={() => onSelectProvince(isSelected ? null : p)}
                   className={`cursor-pointer transition-colors ${
                     isSelected
@@ -136,7 +147,7 @@ export function ProvinceTable({ provinces, selectedProvince, onSelectProvince, f
                   }`}
                 >
                   <td className="p-3 font-semibold text-slate-400">#{p.peringkat}</td>
-                  <td className="p-3 font-bold text-white">{p.provinsi}</td>
+                  <td className="p-3 font-bold text-white">{pName}</td>
                   <td className="p-3">
                     <span
                       className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold border"
@@ -150,40 +161,40 @@ export function ProvinceTable({ provinces, selectedProvince, onSelectProvince, f
                     </span>
                   </td>
                   <td className="p-3 text-right font-semibold text-white">
-                    {p.hp_seluler_2024.toFixed(1)}%
+                    {Number(p.hp_seluler_2024).toFixed(1)}%
                   </td>
-                  <td className="p-3 text-right">{p.ipm_2024.toFixed(1)}</td>
+                  <td className="p-3 text-right">{Number(p.ipm_2024).toFixed(1)}</td>
                   <td className="p-3 text-right text-slate-400">
-                    Rp {formatNumber(p.pdrb_kapita_2024)} rb
+                    Rp {formatNumber(Number(p.pdrb_kapita_2024))} rb
                   </td>
                   <td className="p-3 text-center">
                     <span
                       className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-medium ${
-                        p.kategori_kerentanan === "Sangat Tinggi"
+                        katKerentanan === "Sangat Tinggi"
                           ? "bg-rose-500/20 text-rose-300 border border-rose-500/30"
-                          : p.kategori_kerentanan === "Tinggi"
+                          : katKerentanan === "Tinggi"
                           ? "bg-orange-500/20 text-orange-300 border border-orange-500/30"
-                          : p.kategori_kerentanan === "Sedang"
+                          : katKerentanan === "Sedang"
                           ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
                           : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                       }`}
                     >
-                      {p.kategori_kerentanan}
+                      {katKerentanan}
                     </span>
                   </td>
                   <td className="p-3 text-center">
                     <span
                       className={`text-[10px] font-medium ${
-                        p.kategori_lisa === "High-High"
-                          ? "text-rose-400"
-                          : p.kategori_lisa === "Low-Low"
-                          ? "text-blue-400"
-                          : p.kategori_lisa === "Low-High"
-                          ? "text-purple-400"
+                        katLisa.includes("High-High")
+                          ? "text-rose-400 font-bold"
+                          : katLisa.includes("Low-Low")
+                          ? "text-blue-400 font-bold"
+                          : katLisa.includes("Low-High")
+                          ? "text-purple-400 font-bold"
                           : "text-slate-500"
                       }`}
                     >
-                      {p.kategori_lisa}
+                      {katLisa}
                     </span>
                   </td>
                 </tr>

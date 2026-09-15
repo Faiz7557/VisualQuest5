@@ -1,22 +1,44 @@
-﻿"use client";
+"use client";
 
+import { useState, useEffect } from "react";
 import { 
   Activity, 
   Users, 
   PhoneCall, 
-  ShieldAlert, 
-  Clock, 
   TrendingUp, 
   AlertTriangle, 
   CheckCircle2, 
   MapPin, 
-  Calendar,
+  HeartHandshake,
   Layers,
-  HeartHandshake
+  Sparkles
 } from "lucide-react";
 import { formatNumber } from "@/lib/utils";
 
 export default function MonitoringDashboardPage() {
+  const [latestProjection, setLatestProjection] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/data/forecast_projection.json")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          // Latest forecast month (2026-12)
+          setLatestProjection(data[data.length - 1]);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const totalVol = latestProjection ? Math.round(latestProjection.proyeksi_volume || latestProjection.ensemble) : 86892;
+  const krisisVol = latestProjection ? Math.round(latestProjection.driver_panggilan_krisis || latestProjection.panggilan_krisis_psikologis) : 11466;
+  const burnoutVal = latestProjection ? Number(latestProjection.driver_burnout || latestProjection.indeks_burnout_pekerja).toFixed(2) : "86.95";
+
+  // Case distribution calculation
+  const criticalCases = Math.round(totalVol * 0.25);
+  const moderateCases = Math.round(totalVol * 0.45);
+  const mildCases = Math.round(totalVol * 0.30);
+
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
       {/* Header */}
@@ -40,15 +62,15 @@ export default function MonitoringDashboardPage() {
         </div>
       </div>
 
-      {/* 4 Stat Cards */}
+      {/* 4 Stat Cards Connected to SARIMAX Data */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="glass-card rounded-2xl p-5 border border-white/10">
           <div className="flex items-center justify-between mb-3 text-xs text-slate-400">
-            <span>Total Kebutuhan (Proyeksi 2026)</span>
+            <span>Total Kebutuhan (Puncak 2026)</span>
             <TrendingUp className="h-4 w-4 text-orange-400" />
           </div>
           <div className="text-3xl font-extrabold text-white mb-1 font-heading">
-            86.892
+            {formatNumber(totalVol)}
           </div>
           <p className="text-xs text-slate-400">
             Kasus per bulan (<span className="text-orange-400 font-semibold">+79,4%</span> vs baseline)
@@ -61,7 +83,7 @@ export default function MonitoringDashboardPage() {
             <PhoneCall className="h-4 w-4 text-rose-400" />
           </div>
           <div className="text-3xl font-extrabold text-rose-400 mb-1 font-heading">
-            11.466
+            {formatNumber(krisisVol)}
           </div>
           <p className="text-xs text-slate-400">
             Lapisan darurat paling rentan (<span className="text-rose-400 font-semibold">+70,7%</span>)
@@ -74,7 +96,7 @@ export default function MonitoringDashboardPage() {
             <AlertTriangle className="h-4 w-4 text-amber-400" />
           </div>
           <div className="text-3xl font-extrabold text-amber-400 mb-1 font-heading">
-            86,95
+            {burnoutVal}
           </div>
           <p className="text-xs text-slate-400">
             Skala 0–100 (<span className="text-amber-400 font-semibold">Zona Beban Kritis</span>)
@@ -103,7 +125,7 @@ export default function MonitoringDashboardPage() {
             <h3 className="font-bold text-base text-white font-heading">
               Komposisi Kasus Hasil Skrining Triase
             </h3>
-            <span className="text-xs text-slate-400">Distribusi Beban</span>
+            <span className="text-xs text-slate-400">Distribusi Beban Otomatis</span>
           </div>
 
           <div className="space-y-4">
@@ -113,7 +135,7 @@ export default function MonitoringDashboardPage() {
                   <span className="h-2 w-2 rounded-full bg-rose-400" />
                   Kasus Kritis (Rujukan Langsung Konselor/Ambulans)
                 </span>
-                <span className="font-bold text-white">25% (21.723 kasus)</span>
+                <span className="font-bold text-white">25% ({formatNumber(criticalCases)} kasus)</span>
               </div>
               <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
                 <div className="bg-rose-500 h-full w-[25%]" />
@@ -126,7 +148,7 @@ export default function MonitoringDashboardPage() {
                   <span className="h-2 w-2 rounded-full bg-amber-400" />
                   Kasus Sedang (Telekonseling Terjadwal & Pernapasan)
                 </span>
-                <span className="font-bold text-white">45% (39.101 kasus)</span>
+                <span className="font-bold text-white">45% ({formatNumber(moderateCases)} kasus)</span>
               </div>
               <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
                 <div className="bg-amber-500 h-full w-[45%]" />
@@ -139,7 +161,7 @@ export default function MonitoringDashboardPage() {
                   <span className="h-2 w-2 rounded-full bg-emerald-400" />
                   Kasus Ringan (Chatbot Swabantu & Psikoedukasi)
                 </span>
-                <span className="font-bold text-white">30% (26.068 kasus)</span>
+                <span className="font-bold text-white">30% ({formatNumber(mildCases)} kasus)</span>
               </div>
               <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
                 <div className="bg-emerald-500 h-full w-[30%]" />
@@ -148,17 +170,17 @@ export default function MonitoringDashboardPage() {
           </div>
 
           <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-slate-300 leading-relaxed">
-            <strong>Dampak Efisiensi:</strong> Dengan menyalurkan 30% kasus ringan ke modul swabantu mandiri, kapasitas psikiater dan konselor manusia dapat berfokus 100% pada penanganan kasus darurat dan kritis.
+            <strong>Dampak Efisiensi Beban Tenaga:</strong> Dengan menyalurkan 30% kasus ringan ({formatNumber(mildCases)} kasus/bln) ke modul swabantu mandiri, psikiater dan konselor manusia dapat berfokus penuh 100% pada penanganan kasus berisiko tinggi.
           </div>
         </div>
 
-        {/* Right: Sinergi Stakeholder (Infografis Bagian 8) */}
+        {/* Right: Sinergi Stakeholder */}
         <div className="lg:col-span-6 glass-card rounded-2xl p-6 border border-white/10 space-y-6">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
             <h3 className="font-bold text-base text-white font-heading">
               Sinergi Ekosistem & Stakeholder
             </h3>
-            <span className="text-xs text-slate-400">Model Kolaborasi</span>
+            <span className="text-xs text-slate-400">Model Kolaborasi Terpadu</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">

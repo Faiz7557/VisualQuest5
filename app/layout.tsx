@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
 import "./globals.css";
@@ -21,9 +21,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" className="dark scroll-smooth">
-      <head>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-      </head>
       <body className="min-h-screen flex flex-col bg-[#070d18] text-slate-100 antialiased selection:bg-orange-500 selection:text-white">
         <Navbar />
         <main className="flex-1 w-full">{children}</main>

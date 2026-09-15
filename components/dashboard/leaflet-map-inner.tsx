@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
@@ -8,7 +8,7 @@ import L from "leaflet";
 
 interface Props {
   provinces: ProvinceData[];
-  activeLayer: "klaster" | "kerentanan" | "ponsel" | "lisa";
+  activeLayer: "klaster" | "kerentanan" | "ponsel" | "lisa" | "gwr_ipm";
   onSelectProvince?: (p: ProvinceData | null) => void;
   selectedProvince?: ProvinceData | null;
 }
@@ -26,7 +26,14 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
   // Map dictionary by province name uppercase
   const provMap = new Map<string, ProvinceData>();
   provinces.forEach((p) => {
-    provMap.set(p.provinsi.toUpperCase().trim(), p);
+    const name = (p.provinsi || (p as any).Provinsi || "").toUpperCase().trim();
+    if (name) {
+      provMap.set(name, p);
+      // Handle alternative naming
+      if (name === "KEPULAUAN BANGKA BELITUNG") provMap.set("KEP. BANGKA BELITUNG", p);
+      if (name === "DAERAH ISTIMEWA YOGYAKARTA") provMap.set("DI YOGYAKARTA", p);
+      if (name === "DKI JAKARTA") provMap.set("JAKARTA", p);
+    }
   });
 
   function getFeatureColor(provName: string): string {
@@ -34,12 +41,16 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
     const p = provMap.get(cleanName);
     if (!p) return "#475569";
 
+    const clusterId = Number(p.klaster);
+    const katKerentanan = p.kategori_kerentanan || (p as any).kategori || "";
+    const katLisa = p.kategori_lisa || (p as any).lisa_q || (p as any).lisa || "";
+
     if (activeLayer === "klaster") {
-      return CLUSTERS[p.klaster]?.color || "#64748b";
+      return CLUSTERS[clusterId]?.color || "#64748b";
     }
 
     if (activeLayer === "kerentanan") {
-      switch (p.kategori_kerentanan) {
+      switch (katKerentanan) {
         case "Sangat Tinggi": return "#ef4444";
         case "Tinggi": return "#f97316";
         case "Sedang": return "#eab308";
@@ -49,12 +60,18 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
     }
 
     if (activeLayer === "lisa") {
-      switch (p.kategori_lisa) {
-        case "High-High": return "#ef4444"; // Hotspot
-        case "Low-Low": return "#3b82f6"; // Coldspot
-        case "Low-High": return "#a855f7"; // Outlier
-        default: return "#334155"; // Not significant
-      }
+      if (katLisa.includes("High-High")) return "#ef4444"; // Hotspot
+      if (katLisa.includes("Low-Low")) return "#3b82f6"; // Coldspot
+      if (katLisa.includes("Low-High")) return "#a855f7"; // Outlier
+      return "#334155"; // Tidak signifikan
+    }
+
+    if (activeLayer === "gwr_ipm") {
+      const gwrIpm = (p as any).gwr_ipm_2024 || 0;
+      if (gwrIpm >= 12.0) return "#ef4444"; // KTI (Elastisitas IPM Tertinggi)
+      if (gwrIpm >= 10.0) return "#f97316";
+      if (gwrIpm >= 8.5) return "#eab308";
+      return "#3b82f6";
     }
 
     if (activeLayer === "ponsel") {
@@ -70,8 +87,9 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
   }
 
   function styleFeature(feature: any) {
-    const provName = feature.properties.PROVINSI || feature.properties.NAME_1 || "";
-    const isSelected = selectedProvince?.provinsi.toUpperCase() === provName.toUpperCase();
+    const provName = feature.properties.PROVINSI || feature.properties.provinsi || feature.properties.NAME_1 || "";
+    const selectedName = (selectedProvince?.provinsi || (selectedProvince as any)?.Provinsi || "").toUpperCase();
+    const isSelected = selectedName && selectedName === provName.toUpperCase().trim();
 
     return {
       fillColor: getFeatureColor(provName),
@@ -84,18 +102,27 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
   }
 
   function onEachFeature(feature: any, layer: L.Layer) {
-    const provName = feature.properties.PROVINSI || feature.properties.NAME_1 || "";
+    const provName = feature.properties.PROVINSI || feature.properties.provinsi || feature.properties.NAME_1 || "";
     const p = provMap.get(provName.toUpperCase().trim());
 
     if (p) {
+      const pName = p.provinsi || (p as any).Provinsi || provName;
+      const clusterId = Number(p.klaster);
+      const clusterName = p.nama_klaster || CLUSTERS[clusterId]?.name || `Klaster ${clusterId}`;
+      const clusterColor = CLUSTERS[clusterId]?.color || "#e2e8f0";
+      const hp = Number(p.hp_seluler_2024 || 0).toFixed(1);
+      const ipm = Number(p.ipm_2024 || 0).toFixed(1);
+      const kat = p.kategori_kerentanan || (p as any).kategori || "Sedang";
+      const rank = p.peringkat || (p as any).rank || "-";
+
       layer.bindTooltip(
         `
-        <div class="p-1 text-xs">
-          <strong class="text-sm font-bold text-white block mb-1">${p.provinsi}</strong>
-          <div>Klaster: <span class="font-semibold" style="color:${CLUSTERS[p.klaster]?.color}">${p.nama_klaster}</span></div>
-          <div>Kepemilikan Ponsel: <strong>${p.hp_seluler_2024.toFixed(1)}%</strong></div>
-          <div>IPM 2024: <strong>${p.ipm_2024.toFixed(1)}</strong></div>
-          <div>Kerentanan: <strong>${p.kategori_kerentanan}</strong> (Rank #${p.peringkat})</div>
+        <div class="p-1.5 text-xs font-sans">
+          <strong class="text-sm font-bold text-white block mb-1">${pName}</strong>
+          <div class="text-slate-300">Klaster: <span class="font-bold" style="color:${clusterColor}">${clusterName}</span></div>
+          <div class="text-slate-300">Penetrasi Ponsel: <strong class="text-white">${hp}%</strong></div>
+          <div class="text-slate-300">IPM 2024: <strong class="text-white">${ipm}</strong></div>
+          <div class="text-slate-300">Kerentanan: <strong class="text-orange-400">${kat}</strong> (Rank #${rank})</div>
         </div>
         `,
         { sticky: true, className: "leaflet-custom-tooltip" }
@@ -137,7 +164,7 @@ export default function LeafletMapInner({ provinces, activeLayer, onSelectProvin
         />
         {geoData && (
           <GeoJSON
-            key={activeLayer + (selectedProvince ? selectedProvince.provinsi : "")}
+            key={activeLayer + (selectedProvince ? (selectedProvince.provinsi || (selectedProvince as any).Provinsi) : "")}
             data={geoData}
             style={styleFeature}
             onEachFeature={onEachFeature}

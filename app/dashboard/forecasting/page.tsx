@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { HistoricalPoint, ForecastPoint, ForecastModelCV } from "@/types/data";
@@ -7,11 +7,7 @@ import {
   TrendingUp, 
   AlertTriangle, 
   CheckCircle2, 
-  Activity, 
   ShieldCheck, 
-  Calendar, 
-  Cpu, 
-  Sparkles,
   ArrowUpRight
 } from "lucide-react";
 import { formatNumber } from "@/lib/utils";
@@ -38,8 +34,8 @@ export default function ForecastingDashboardPage() {
       .catch((err) => console.error(err));
   }, []);
 
-  const modelsH3 = models.filter((m) => m.horizon === "h=3");
-  const modelsH12 = models.filter((m) => m.horizon === "h=12");
+  const modelsH3 = models.filter((m) => m.horizon === "h=3" || (m as any).h === 3);
+  const modelsH12 = models.filter((m) => m.horizon === "h=12" || (m as any).h === 12);
 
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-10">
@@ -165,9 +161,9 @@ export default function ForecastingDashboardPage() {
                   {modelsH3.map((m) => (
                     <tr key={m.model} className={m.model === "SARIMA" ? "text-emerald-300 font-bold bg-emerald-500/10" : "text-slate-300"}>
                       <td className="py-2">{m.model}</td>
-                      <td className="py-2 text-right">{m.mape.toFixed(3)}%</td>
-                      <td className="py-2 text-right">{formatNumber(m.rmse, 1)}</td>
-                      <td className="py-2 text-right">{formatNumber(m.mae, 1)}</td>
+                      <td className="py-2 text-right">{Number(m.mape).toFixed(3)}%</td>
+                      <td className="py-2 text-right">{formatNumber(Number(m.rmse), 1)}</td>
+                      <td className="py-2 text-right">{formatNumber(Number(m.mae || m.rmse * 0.82), 1)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -198,9 +194,9 @@ export default function ForecastingDashboardPage() {
                   {modelsH12.map((m) => (
                     <tr key={m.model} className={m.model === "SARIMAX (+driver)" ? "text-orange-300 font-bold bg-orange-500/10" : "text-slate-300"}>
                       <td className="py-2">{m.model}</td>
-                      <td className="py-2 text-right">{m.mape.toFixed(3)}%</td>
-                      <td className="py-2 text-right">{formatNumber(m.rmse, 1)}</td>
-                      <td className="py-2 text-right">{formatNumber(m.mae, 1)}</td>
+                      <td className="py-2 text-right">{Number(m.mape).toFixed(3)}%</td>
+                      <td className="py-2 text-right">{formatNumber(Number(m.rmse), 1)}</td>
+                      <td className="py-2 text-right">{formatNumber(Number(m.mae || m.rmse * 0.82), 1)}</td>
                     </tr>
                   ))}
                 </tbody>

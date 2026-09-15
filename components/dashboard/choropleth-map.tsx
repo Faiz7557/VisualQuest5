@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import dynamic from "next/dynamic";
 import { ProvinceData } from "@/types/data";
@@ -15,7 +15,7 @@ const LeafletMapInner = dynamic(() => import("./leaflet-map-inner"), {
 
 interface Props {
   provinces: ProvinceData[];
-  activeLayer: "klaster" | "kerentanan" | "ponsel" | "lisa";
+  activeLayer: "klaster" | "kerentanan" | "ponsel" | "lisa" | "gwr_ipm";
   onSelectProvince?: (p: ProvinceData | null) => void;
   selectedProvince?: ProvinceData | null;
 }

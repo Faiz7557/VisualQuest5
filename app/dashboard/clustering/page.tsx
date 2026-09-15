@@ -1,30 +1,28 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { ProvinceData } from "@/types/data";
 import { ChoroplethMap } from "@/components/dashboard/choropleth-map";
 import { ClusterCards } from "@/components/dashboard/cluster-cards";
 import { ProvinceTable } from "@/components/dashboard/province-table";
+import { PolicySimulator } from "@/components/dashboard/policy-simulator";
 import { CLUSTERS } from "@/lib/constants";
 import { 
   Layers, 
   MapPin, 
-  Info, 
   Sparkles, 
-  TrendingUp, 
-  CheckCircle2, 
-  BarChart2, 
   Smartphone, 
   GraduationCap, 
   DollarSign, 
-  Briefcase,
-  X
+  Briefcase, 
+  X, 
+  Compass 
 } from "lucide-react";
 import { formatNumber } from "@/lib/utils";
 
 export default function ClusteringDashboardPage() {
   const [provinces, setProvinces] = useState<ProvinceData[]>([]);
-  const [activeLayer, setActiveLayer] = useState<"klaster" | "kerentanan" | "ponsel" | "lisa">("klaster");
+  const [activeLayer, setActiveLayer] = useState<"klaster" | "kerentanan" | "ponsel" | "lisa" | "gwr_ipm">("klaster");
   const [selectedProvince, setSelectedProvince] = useState<ProvinceData | null>(null);
   const [selectedCluster, setSelectedCluster] = useState<number | null>(null);
 
@@ -35,10 +33,14 @@ export default function ClusteringDashboardPage() {
       .catch((err) => console.error(err));
   }, []);
 
-  const clusterDetails = selectedProvince ? CLUSTERS[selectedProvince.klaster] : null;
+  const clusterId = selectedProvince ? Number(selectedProvince.klaster) : null;
+  const clusterDetails = clusterId !== null ? CLUSTERS[clusterId] : null;
+  const provName = selectedProvince ? (selectedProvince.provinsi || (selectedProvince as any).Provinsi) : "";
+  const skorKerentanan = selectedProvince ? Number(selectedProvince.skor_kerentanan || (selectedProvince as any).indeks_kerentanan || 0) : 0;
+  const katLisa = selectedProvince ? (selectedProvince.kategori_lisa || (selectedProvince as any).lisa_q || (selectedProvince as any).lisa || "Tidak Signifikan") : "";
 
   return (
-    <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-8">
+    <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-10">
       {/* 1. Page Header & Key Metrics Bar */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-6 border-b border-white/10">
         <div className="space-y-2">
@@ -88,7 +90,7 @@ export default function ClusteringDashboardPage() {
               <Layers className="h-4 w-4 text-orange-400" />
               Pilih Layer Peta:
             </span>
-            <div className="inline-flex rounded-xl bg-[#0b162a] p-1 border border-white/10">
+            <div className="inline-flex flex-wrap rounded-xl bg-[#0b162a] p-1 border border-white/10">
               <button
                 onClick={() => setActiveLayer("klaster")}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
@@ -127,14 +129,23 @@ export default function ClusteringDashboardPage() {
                     : "text-slate-400 hover:text-white"
                 }`}
               >
-                LISA (Spatial Cluster)
+                LISA Spasial
+              </button>
+              <button
+                onClick={() => setActiveLayer("gwr_ipm")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  activeLayer === "gwr_ipm"
+                    ? "bg-orange-500 text-white shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                Koefisien GWR (IPM)
               </button>
             </div>
           </div>
 
-          {/* Quick Note */}
           <span className="text-xs text-slate-500 italic">
-            *Klik salah satu poligon provinsi di peta untuk membuka audit profil indikator
+            *Klik poligon provinsi di peta untuk melihat audit indikator & koefisien GWR
           </span>
         </div>
 
@@ -158,7 +169,7 @@ export default function ClusteringDashboardPage() {
                     Audit Detail Wilayah • Peringkat #{selectedProvince.peringkat}
                   </span>
                   <h3 className="text-2xl font-black text-white font-heading">
-                    {selectedProvince.provinsi}
+                    {provName}
                   </h3>
                 </div>
                 <button
@@ -178,7 +189,7 @@ export default function ClusteringDashboardPage() {
                 }}
               >
                 <div className="text-xs font-semibold" style={{ color: clusterDetails?.color }}>
-                  Klaster {selectedProvince.klaster}: {selectedProvince.nama_klaster}
+                  Klaster {selectedProvince.klaster}: {clusterDetails?.name}
                 </div>
                 <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
                   {clusterDetails?.description}
@@ -193,7 +204,7 @@ export default function ClusteringDashboardPage() {
                     Kepemilikan Ponsel (2024)
                   </span>
                   <span className="font-bold text-white text-sm">
-                    {selectedProvince.hp_seluler_2024.toFixed(1)}%
+                    {Number(selectedProvince.hp_seluler_2024 || 0).toFixed(1)}%
                   </span>
                 </div>
 
@@ -203,7 +214,7 @@ export default function ClusteringDashboardPage() {
                     Indeks Pembangunan Manusia
                   </span>
                   <span className="font-bold text-white text-sm">
-                    {selectedProvince.ipm_2024.toFixed(1)}
+                    {Number(selectedProvince.ipm_2024 || 0).toFixed(1)}
                   </span>
                 </div>
 
@@ -213,7 +224,7 @@ export default function ClusteringDashboardPage() {
                     Rata-rata Lama Sekolah (RLS)
                   </span>
                   <span className="font-bold text-white text-sm">
-                    {selectedProvince.rls_2024.toFixed(2)} thn
+                    {Number(selectedProvince.rls_2024 || 0).toFixed(2)} thn
                   </span>
                 </div>
 
@@ -223,7 +234,7 @@ export default function ClusteringDashboardPage() {
                     PDRB per Kapita ADHB
                   </span>
                   <span className="font-bold text-white text-sm">
-                    Rp {formatNumber(selectedProvince.pdrb_kapita_2024)} rb
+                    Rp {formatNumber(Number(selectedProvince.pdrb_kapita_2024 || 0))} rb
                   </span>
                 </div>
 
@@ -233,8 +244,34 @@ export default function ClusteringDashboardPage() {
                     Tingkat Pengangguran Terbuka
                   </span>
                   <span className="font-bold text-white text-sm">
-                    {selectedProvince.tpt_2024.toFixed(2)}%
+                    {Number(selectedProvince.tpt_2024 || 0).toFixed(2)}%
                   </span>
+                </div>
+              </div>
+
+              {/* Koefisien GWR Lokal */}
+              <div className="p-3.5 rounded-xl bg-orange-500/10 border border-orange-500/20 text-xs space-y-2">
+                <span className="text-orange-400 font-bold flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
+                  <Compass className="h-3.5 w-3.5" />
+                  Koefisien Spasial GWR Lokal
+                </span>
+                <div className="grid grid-cols-2 gap-2 text-[11px]">
+                  <div>
+                    <span className="text-slate-400 block">Elastisitas IPM:</span>
+                    <strong className="text-white">+{Number((selectedProvince as any).gwr_ipm_2024 || 0).toFixed(2)}</strong>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block">Pengaruh RLS:</span>
+                    <strong className="text-white">{Number((selectedProvince as any).gwr_rls_2024 || 0).toFixed(2)}</strong>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block">Log PDRB:</span>
+                    <strong className="text-white">+{Number((selectedProvince as any).gwr_pdrb_log || 0).toFixed(2)}</strong>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block">TPT:</span>
+                    <strong className="text-white">+{Number((selectedProvince as any).gwr_tpt_2024 || 0).toFixed(2)}</strong>
+                  </div>
                 </div>
               </div>
 
@@ -243,13 +280,13 @@ export default function ClusteringDashboardPage() {
                 <div>
                   <span className="text-slate-400 text-[11px] block">Skor Kerentanan (IKAD)</span>
                   <span className="font-black text-white text-base">
-                    {selectedProvince.skor_kerentanan.toFixed(4)}
+                    {skorKerentanan.toFixed(4)}
                   </span>
                 </div>
                 <div className="text-right">
                   <span className="text-slate-400 text-[11px] block">Pola Spasial LISA</span>
                   <span className="font-bold text-orange-400">
-                    {selectedProvince.kategori_lisa}
+                    {katLisa}
                   </span>
                 </div>
               </div>
@@ -297,6 +334,9 @@ export default function ClusteringDashboardPage() {
           filterCluster={selectedCluster}
         />
       </div>
+
+      {/* 5. Policy Simulator (What-If Scenario Planning) */}
+      <PolicySimulator />
     </div>
   );
 }
