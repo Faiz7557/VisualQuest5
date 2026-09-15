@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
+import { PresentationShortcuts } from "@/components/shared/presentation-shortcuts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1 w-full">{children}</main>
         <Footer />
+        <PresentationShortcuts />
       </body>
     </html>
   );
