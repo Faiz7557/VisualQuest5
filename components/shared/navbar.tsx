@@ -9,8 +9,7 @@ import {
   Activity, 
   Info,
   Menu,
-  X,
-  Keyboard
+  X
 } from "lucide-react";
 import { useState } from "react";
 
@@ -45,7 +44,7 @@ export function Navbar() {
                 SEJIWA<span className="text-orange-500">+</span>
               </span>
             </div>
-            <p className="text-[11px] text-slate-400">Tim IRIS • Universitas Airlangga</p>
+            <p className="text-[11px] text-slate-400">IRIS kata Saffa mau 67</p>
           </div>
         </Link>
 
@@ -70,18 +69,8 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* CTA Button & Presentation Mode Trigger */}
-        <div className="hidden sm:flex items-center gap-2.5">
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent("open-presentation-palette"))}
-            title="Buka Navigator Presentasi (Tekan ?)"
-            className="hidden xl:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-300 hover:text-white transition-all"
-          >
-            <Keyboard className="h-3.5 w-3.5 text-orange-400" />
-            <span>Mode Presentasi</span>
-            <kbd className="px-1 py-0.2 bg-black/40 rounded text-[9px] font-mono text-slate-400 border border-white/10">?</kbd>
-          </button>
-
+        {/* CTA Button */}
+        <div className="hidden sm:flex items-center gap-3">
           <Link
             href="/sejiwa"
             className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 px-4 py-2 text-xs font-bold text-white shadow-glow transition-all hover:scale-105"
@@ -124,18 +113,7 @@ export function Navbar() {
               </Link>
             );
           })}
-          <div className="pt-2 space-y-2">
-            <button
-              onClick={() => {
-                setIsOpen(false);
-                window.dispatchEvent(new CustomEvent("open-presentation-palette"));
-              }}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-white/10 p-2.5 text-xs font-bold text-slate-200 hover:bg-white/15 border border-white/10 transition-colors"
-            >
-              <Keyboard className="h-4 w-4 text-orange-400" />
-              <span>Buka Navigator Presentasi (?)</span>
-            </button>
-
+          <div className="pt-2">
             <Link
               href="/sejiwa"
               onClick={() => setIsOpen(false)}
